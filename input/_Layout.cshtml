@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="et">
+
+<head>
+	<meta charset="utf-8" />
+	<title>Pingviinipoeg Lolo | Mina ja maailm</title>
+	<meta name="description" content="Lood sellest, kuidas pingviinipoeg Lolo maailmas hakkama saab." />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<meta name="google-site-verification" content="e_uloZJxF3ssKrxopeqovNFJYBm-y2FMEoMU0FBs8dc" />
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link rel="preload" as="style" href="https://fonts.googleapis.com/css?family=Open+Sans%3A400%2C300%2C600%2C700%2C800&subset=latin%2Clatin-ext&display=swap" />
+	<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Open+Sans%3A400%2C300%2C600%2C700%2C800&subset=latin%2Clatin-ext&display=swap" />
+	<link rel="stylesheet" type="text/css" href="@Context.GetLink("/scss/main.css")" />
+	<link rel="alternate" type="application/rss+xml" title="Pingviinipoeg Lolo maailm" href="@Context.GetLink("feed.rss")" />
+	<link rel="alternate" type="application/atom+xml" title="Pingviinipoeg Lolo maailm" href="@Context.GetLink("feed.atom")" />
+	<script src="https://kit.fontawesome.com/372a532b6d.js" crossorigin="anonymous" defer></script>
+</head>
+
+<body>
+	<header>
+		<div class="title"><a href="@Context.GetLink("/")">Pingviinipoeg Lolo</a></div>
+		<div class="subtitle">Mina ja maailm</div>
+	</header>
+	<main>
+		@RenderBody()
+	</main>
+	<footer>
+		<nav>
+			@await RenderSectionAsync("Footer", true)
+		</nav>
+		<p>Loodud <a href="https://statiq.dev" target="_blank" rel="noopener">Statiq</a> veebimootoriga | Kujundus: Kohandatud <a href="https://basilosaur.us" target="_blank" rel="noopener">basilosaur.us</a> Beluga</p>
+		<p>&copy; @DateTime.Now.Year Pingviinipoeg Lolo</p>
+	</footer>
+</body>
+
+</html>

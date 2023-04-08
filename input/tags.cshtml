@@ -1,0 +1,39 @@
+﻿ArchiveSources: => GetString("PostSources")
+ArchiveOrderKey: Published
+ArchiveKey: Tags
+ArchiveOrderDescending: true
+ArchivePageSize: 10
+ArchiveTitle: => GetString("GroupKey")
+ArchiveKeyComparer: => StringComparer.OrdinalIgnoreCase.ToConvertingEqualityComparer()
+ArchiveDestination: >
+  => GetInt("Index") < 2 ? $"tags/{NormalizedPath.OptimizeFileName(GetString("GroupKey"))}/index.html" : $"tags/{NormalizedPath.OptimizeFileName(GetString("GroupKey"))}/{GetInt("Index")}.html"
+IncludeInSitemap: false
+---
+
+@{
+	Layout = "_Layout.cshtml";
+}
+
+<h1 class="topic"><i class="fal fa-folder-open"></i> @Document.GetTitle()</h1>
+
+@if (!Document.ContainsKey(Keys.GroupKey)) {
+	@foreach (var tag in Document.GetChildren().OrderByDescending(x => x.GetChildren().Count())) {
+		<h2><a href="@Context.GetLink(tag)">@tag.GetTitle()</a></h2>
+	}
+}
+else {
+	await Html.RenderPartialAsync("_Posts.cshtml", Document);
+}
+
+
+@section Footer {
+	@{
+		var navItem = new NavItem {
+			Previous = Model.GetDocument(Keys.Next),
+			Next = Model.GetDocument(Keys.Previous),
+			IsPost = false
+		};
+
+		await Html.RenderPartialAsync("_Footer.cshtml", navItem);
+	}
+}

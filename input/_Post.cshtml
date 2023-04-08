@@ -1,0 +1,30 @@
+﻿@{
+	Layout = "_Layout.cshtml";
+}
+
+<h1>@Model.GetTitle()</h1>
+
+<nav class="meta">
+	@await Html.PartialAsync("_Meta.cshtml", Document)
+</nav>
+
+<article>
+	@RenderBody()
+</article>
+
+<nav class="tags">
+	@await Html.PartialAsync("_Tags.cshtml", Document)
+</nav>
+
+@section Footer {
+	@{
+		var inputs = Context.Inputs.OrderByDescending(x => x.GetDateTime("Published"));
+		var navItem = new NavItem {
+			Previous = inputs.GetNext(Document),
+			Next = inputs.GetPrevious(Document),
+			IsPost = true
+		};
+
+		await Html.RenderPartialAsync("_Footer.cshtml", navItem);
+	}
+}

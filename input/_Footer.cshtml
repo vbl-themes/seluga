@@ -1,0 +1,24 @@
+﻿@inherits StatiqRazorPage<Pingviinipoeg.theme.NavItem>
+
+@{
+	<p>
+		@if (Model.Previous != null) {
+			<i class="far fa-long-arrow-alt-left"></i>
+			<a href="@Context.GetLink(Model.Previous)">
+				@(Model.IsPost || Model.IsArchive ? Model.Previous.GetString("Title") : "Vanemad postitused")
+			</a>
+		}
+	</p>
+}
+
+@{
+	<p>
+		@if (Model.Next != null) {
+			<a href="@Context.GetLink(Model.Next)">
+				@(Model.IsPost || Model.IsArchive ? Model.Next.GetString("Title") : "Uuemad postitused")
+			</a>
+			<i class="far fa-long-arrow-alt-right"></i>
+		}
+	</p>
+}
+

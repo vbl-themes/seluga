@@ -1,0 +1,33 @@
+﻿ArchiveSources: => GetString("PostSources")
+ArchiveOrderKey: Published
+ArchiveKey: => GetDateTime("Published").ToString("yyyy/MM")
+ArchiveOrderDescending: true
+ArchiveTitle: => GetDateTime("GroupKey").ToString("MMMM yyyy", new System.Globalization.CultureInfo("et-EE", false))
+ArchiveDestination: => NormalizedPath.Combine(GetString("GroupKey")).Combine("index.html")
+IncludeInSitemap: false
+---
+
+@{
+	Layout = "_Layout.cshtml";
+}
+
+<h1 class="topic"><i class="fal fa-calendar-alt"></i> @Document.GetTitle()</h1>
+
+@if (Document.ContainsKey(Keys.GroupKey)) {
+	await Html.RenderPartialAsync("_Posts.cshtml", Document);
+}
+
+@section Footer {
+	@if (Document.ContainsKey(Keys.GroupKey)) {
+		var navItem = new NavItem {
+			Previous = Context.Inputs.GetNext(Document),
+			Next = Context.Inputs.GetPrevious(Document),
+			IsArchive = true
+		};
+
+
+		@if(navItem.Previous != null && navItem.Previous.Destination.Parent.IsNullOrEmpty) navItem.Previous = null;
+		@if(navItem.Next != null && navItem.Next.Destination.Parent.IsNullOrEmpty) navItem.Next = null;
+		await Html.RenderPartialAsync("_Footer.cshtml", navItem);
+	}
+}

@@ -1,0 +1,24 @@
+﻿ArchiveSources: => GetString("PostSources")
+ArchiveOrderKey: Published
+ArchiveOrderDescending: true
+ArchivePageSize: 10
+IncludeInSitemap: false
+---
+
+@{
+	Layout = "_Layout.cshtml";
+}
+
+@await Html.PartialAsync("_Posts.cshtml", Document)
+
+@section Footer {
+	@{
+		var navItem = new NavItem {
+			Previous = Model.GetDocument(Keys.Next),
+			Next = Model.GetDocument(Keys.Previous),
+			IsPost = false
+		};
+
+		await Html.RenderPartialAsync("_Footer.cshtml", navItem);
+	}
+}

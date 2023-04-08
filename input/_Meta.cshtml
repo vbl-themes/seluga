@@ -1,0 +1,16 @@
+﻿@{ 
+	var date = @Model.GetDateTime(WebKeys.Published).ToString("yyyy/MM");
+	var doc = OutputPages[$"{date}/index.html"].FirstOrDefault();
+}
+
+
+<p>
+	<a href="@Context.GetLink(doc)">
+		<i class="far fa-calendar-alt"></i>
+		@Model.GetDateTime(WebKeys.Published).ToString("d", new System.Globalization.CultureInfo("et_EE"))
+	</a>
+</p>
+
+<p>
+	<i class="fas fa-user"></i> Pingviinipoeg Lolo
+</p>
