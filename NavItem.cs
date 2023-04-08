@@ -1,4 +1,5 @@
-﻿using Statiq.Common;
+﻿#nullable enable
+using Statiq.Common;
 
 namespace Seluga; 
 
